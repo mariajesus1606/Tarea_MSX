@@ -71,4 +71,8 @@ def detallejuego(identificador):
 
 
 #Probar en el entorno de desarrollo
-app.run(debug=True)
+#app.run(debug=True)
+
+#Despliegue en Heroku
+port=os.environ["PORT"]
+app.run('0.0.0.0',int(port), debug=True)
