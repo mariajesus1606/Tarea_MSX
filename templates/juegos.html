@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Búsqueda de juegos{% endblock %}
+{% block contenido %}
+	<div class="inner">
+		<header>
+			<h2>JUEGOS MSX</h2>
+		</header>
+		<div class="inner" id="formulario">
+			<section>
+				<h3>Busca aquí tus juegos</h3>
+				<form method="post" action="/juegos">
+					<div class="row uniform 50%">
+						<div class="6u 12u$(xsmall)">
+							<input type="text" name="name" placeholder="Pon aquí el nombre del juego" value="{{cadena}}" />
+							<select name= "cat">
+								{% if categorias %}
+								<option>Todos</option>
+								{% for elem in categorias -%}
+								{% if elem == categoria %}
+								<option value= "{{elem}}" selected="selected">{{elem.title()}}</option>
+								{% else %}
+								<option value= "{{elem}}">{{elem.title()}}</option>
+								{% endif %}
+								{% endfor -%}
+								{% endif %}
+							</select>
+						<div class="12u$">
+							<ul class="actions">
+								<li><input type="submit" value="Buscar" class="special" /></li>
+							</ul>
+						</div>
+					</div>
+				</form>
+			</section>
+		</div>
+	</div>
+
+{% if juegos %}
+	<div class="inner">
+		<header>
+			<h2>LISTA JUEGOS MSX</h2>
+		</header>
+		<div class="inner" id="formulario">
+			<section>
+                <h3>Juegos</h3>
+                <table>
+                    <tr>
+                        <td>Nombres</td>
+                        <td>Desarrolladores</td>
+                        <td>Más información</td>
+                    </tr>
+					{% for elem in juegos -%}
+						{% if elem[0] and elem[3] %}
+                    <tr>
+                        <td><strong>{{elem[0]}}</strong></td>
+                        <td><strong>{{elem[1]}}</strong></td>
+                        <td><u><a href="/juego/{{elem[2]}}">detalle</a></u></td>
+                    </tr>
+						{% endif %}
+						{% endfor -%}
+                </table>
+			</section>
+		</div>
+	</div>
+{% endif %}
+{% endblock %}
