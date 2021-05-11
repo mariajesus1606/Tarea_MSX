@@ -1,9 +1,10 @@
-from flask import Flask, render_template,request,abort
-app = Flask(__name__)	
-from flask import Flask,render_template,abort
 import os
+from flask import Flask, render_template, abort,request
 import json
 app = Flask(__name__)
+
+with open("MSX.json") as fichero:
+    info=json.load(fichero)
 
 
 @app.route('/',methods=["GET"])
